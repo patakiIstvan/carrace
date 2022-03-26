@@ -25,7 +25,7 @@ function clientResponse(funct, data) {
                 )
             });
             break;
-            case "moveCars":
+            case "moveCars": 
             console.log("WTF are you trying to do?")
             break;
         default:
