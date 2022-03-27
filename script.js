@@ -1,6 +1,6 @@
 const makeCars = {
     functionname: 'makeCars',
-    carNum: 6
+    carNum: 3
 }
 const moveCars = {
     functionname: 'moveCars'
@@ -14,11 +14,11 @@ function clientResponse(funct, data) {
             data["cars"].forEach(car => {
                 const moveRotation = car["distance"] / 100 * 360 * car["maxLap"];
                 $('.racetrack').append(
-                    `<div class="racer">
+                    `<div id="car${car["placement"]}" class="racer"
+                    style=" transform: translateY(-50%) rotate(-${moveRotation}deg);">
                    <div style="
                    right: ${car["placement"]*40}px; 
                    background-color: ${car["color"]};
-                   transform: translateY(-50%) rotate(${moveRotation}deg);
                    " class="current-pos">
                    </div>
                    </div>`
@@ -26,7 +26,13 @@ function clientResponse(funct, data) {
             });
             break;
             case "moveCars": 
-            console.log("WTF are you trying to do?")
+            console.log("car moving WROM WROM")
+            console.log(data)
+            const numOfCars = $('.racetrack').children().length;
+            const moveRotation = 240;
+            for (let i=1; i <= numOfCars; i++){
+                $(`#car${i}`).css("transform", `translateY(-50%) rotate(-${moveRotation}deg)`);
+            }
             break;
         default:
             console.log("unknown function");
@@ -45,5 +51,5 @@ $(".start-button").click(function () {
     sendServerData("init.php", makeCars);
     setTimeout(function () {
         sendServerData("init.php", moveCars);
-    }, 5000);
+    }, 500);
 });

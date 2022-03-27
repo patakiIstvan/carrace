@@ -1,26 +1,25 @@
 <?php
 
 require_once "Racecar.php";
-
-$cars = [];
+require_once "Race.php";
 
 
 
 if( isset($_POST['functionname']) ) { 
     $aResult = array();
+    $aResult['cars'] = Array();
     
     switch($_POST['functionname']) {
 
       // MAKECARS (or remove them)
        case 'makeCars': // MAKECAR =======================================
-          $aResult['result'] = "succes";
          //megadott számú kocsi instance legyárzása
           for ($i = 0; $i < $_POST['carNum']; $i++) {
             $car = new Racecar();
-            $cars[] = $car;
+            Race::setCars( $car);
          }
          // megfelelő adatok kinyerése az instancekből
-          $aResult['cars'] = Array();
+         $cars = Race::getCars();
           foreach ($cars as $car){
             $a = [];
             $a["placement"] = $car->getPlacement();
@@ -31,7 +30,16 @@ if( isset($_POST['functionname']) ) {
             $aResult['cars'][] = $a;
           }
           break;
-
+         case 'moveCars':
+          $cars = Race::getCars();
+            foreach ($cars as $car){
+               $a = [];
+               $car->move();
+               $a['distance'] = $car->getDist();
+               $aResult['cars'][] = $a;
+            }
+           //$aResult["cars"] = Race::getCars();
+            break;
        default:
           $aResult['error'] = 'Not found function '.$_POST['functionname'].'!';
           break;

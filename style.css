@@ -33,7 +33,7 @@
     position: absolute;
     top: 50%;
     width: 100%;
-    transition: rotate 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
 }
 .current-pos{
     position: absolute;
