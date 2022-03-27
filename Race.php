@@ -6,16 +6,16 @@ class Race{
     protected static $number_of_laps = 3;
     private static $cars = [];
 
-    public function toggleStarted(){
+    public static function toggleStarted(){
         self::$raceStarted = !self::$raceStarted;
     }
-    public function getNumber_of_laps(){
+    public static function getNumber_of_laps(){
         return self::$number_of_laps;
     }
-    public function setNumber_of_laps($laps){
+    public static function setNumber_of_laps($laps){
         self::$number_of_laps = $laps;
     }
-    public function getNumber_of_cars(){
+    public static function getNumber_of_cars(){
         return self::$number_of_cars;
     }
 

@@ -5,7 +5,7 @@ const makeCars = {
 const moveCars = {
     functionname: 'moveCars'
 }
-
+// USE RECEIVED DATA
 function clientResponse(funct, data) {
     switch (funct) {
         case "makeCars":
@@ -39,7 +39,7 @@ function clientResponse(funct, data) {
     }
 
 }
-
+// SEND DATA TO SERVER
 function sendServerData(path, funct) {
     $.post(path, funct,
         function (data, status) {
