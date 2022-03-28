@@ -17,15 +17,7 @@
         </div>
         <div class="controls">
             <button class="start-button">futam kezdése</button>
-            <ul>
-                <li>
-                    <div class="colorContainer">
-                        <span>1</span>
-                    </div>
-                    <div class="timeContainer">
-                        <span>32.143s</span>
-                    </div>
-                </li>
+            <ul id="helyezesContainer">
             </ul>
         </div>
     </div>

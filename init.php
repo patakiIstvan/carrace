@@ -10,6 +10,7 @@ function storeCars($carInstances){
   fwrite($carFile, $carInstances);
   fclose($carFile);
 }
+// get data from cardata.ser file
 function getCars(){
   $myfile = fopen("cardata.ser", "r");
   $cars = fread($myfile,filesize("cardata.ser"));
@@ -51,6 +52,7 @@ if( isset($_POST['functionname']) ) {
                $a["maxLap"] = $car->getNumber_of_laps();
                $a["time"] = $car->getTime();
                $a["won"] = $car->getWon();
+               $a["color"] = $car->getColor();
                $a['distance'] = $car->getDist();
                $aResult['cars'][] = $a;
             }
