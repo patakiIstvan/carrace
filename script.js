@@ -5,10 +5,11 @@ const makeCars = {
 const moveCars = {
     functionname: 'moveCars'
 }
+let movingCars = 0;
 // USE RECEIVED DATA
 function clientResponse(funct, data) {
     switch (funct) {
-        case "makeCars":
+        case "makeCars": // kocsik elhelyezése a versenypályán a kapott adatok alapján
             console.log(data);
             $('.racetrack').empty();
             data["cars"].forEach(car => {
@@ -25,13 +26,17 @@ function clientResponse(funct, data) {
                 )
             });
             break;
-        case "moveCars":
+        case "moveCars": // kocsik mozgása illetve nyerése a kapott adatok alapján
+            movingCars = 0;
             console.log("car moving WROM WROM")
             console.log(data)
             const numOfCars = $('.racetrack').children().length;
             data["cars"].forEach(car => {
                 const moveRotation = car["distance"] / 100 * 360 * car["maxLap"];
                 $(`#car${car["placemenet"]}`).css("transform", `translateY(-50%) rotate(-${moveRotation}deg)`);
+            if (car["distance"]<100){
+                movingCars +=1;
+            }
             });
             break;
         default:
@@ -50,12 +55,13 @@ function sendServerData(path, funct) {
 $(".start-button").click(function () {
     sendServerData("init.php", makeCars);
 
-    let i = 0;
-    const interval = setInterval(() => {
-        i += 1;
-        if (i > 30) {
+    movingCars = 1;
+    var interval = setInterval(() => {
+        console.log(movingCars)
+        if (movingCars <= 0) {
             clearInterval(interval)
+        } else {
+            sendServerData("init.php", moveCars);
         }
-        sendServerData("init.php", moveCars);
     }, 150)
 });

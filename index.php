@@ -23,9 +23,8 @@
                         <span>1</span>
                     </div>
                     <div class="timeContainer">
-                        <span>sg</span>
+                        <span>32.143s</span>
                     </div>
-                    Nyertes: <span class="winner-text">None</span>
                 </li>
             </ul>
         </div>

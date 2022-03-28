@@ -10,6 +10,12 @@ function storeCars($carInstances){
   fwrite($carFile, $carInstances);
   fclose($carFile);
 }
+function getCars(){
+  $myfile = fopen("cardata.ser", "r");
+  $cars = fread($myfile,filesize("cardata.ser"));
+  fclose($myfile);
+   return unserialize($cars);
+}
 
 if( isset($_POST['functionname']) ) { 
     $aResult = array();
@@ -30,7 +36,6 @@ if( isset($_POST['functionname']) ) {
             $a = [];
             $a["placement"] = $car->getPlacement();
             $a["color"] = $car->getColor();
-            $a["lap"] = $car->getLap();
             $a["maxLap"] = $car->getNumber_of_laps();
             $a["distance"] = $car->getDist();
             $aResult['cars'][] = $a;
@@ -38,15 +43,14 @@ if( isset($_POST['functionname']) ) {
           storeCars(Race::getCars());
           break;
          case 'moveCars': // MOVECAR =======================================
-          $myfile = fopen("cardata.ser", "r");
-          $cars = fread($myfile,filesize("cardata.ser"));
-          fclose($myfile);
-          $cars = unserialize($cars);
+          $cars = getCars();
             foreach ($cars as $car){
                $a = [];
                $car->move();
                $a['placemenet'] = $car->getPlacement();
                $a["maxLap"] = $car->getNumber_of_laps();
+               $a["time"] = $car->getTime();
+               $a["won"] = $car->getWon();
                $a['distance'] = $car->getDist();
                $aResult['cars'][] = $a;
             }
