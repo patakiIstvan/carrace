@@ -25,14 +25,14 @@ function clientResponse(funct, data) {
                 )
             });
             break;
-            case "moveCars": 
+        case "moveCars":
             console.log("car moving WROM WROM")
             console.log(data)
             const numOfCars = $('.racetrack').children().length;
-            const moveRotation = 240;
-            for (let i=1; i <= numOfCars; i++){
-                $(`#car${i}`).css("transform", `translateY(-50%) rotate(-${moveRotation}deg)`);
-            }
+            data["cars"].forEach(car => {
+                const moveRotation = car["distance"] / 100 * 360 * car["maxLap"];
+                $(`#car${car["placemenet"]}`).css("transform", `translateY(-50%) rotate(-${moveRotation}deg)`);
+            });
             break;
         default:
             console.log("unknown function");
@@ -49,7 +49,13 @@ function sendServerData(path, funct) {
 
 $(".start-button").click(function () {
     sendServerData("init.php", makeCars);
-    setTimeout(function () {
+
+    let i = 0;
+    const interval = setInterval(() => {
+        i += 1;
+        if (i > 30) {
+            clearInterval(interval)
+        }
         sendServerData("init.php", moveCars);
-    }, 500);
+    }, 150)
 });

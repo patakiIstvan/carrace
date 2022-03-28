@@ -19,6 +19,12 @@
             <button class="start-button">futam kezdése</button>
             <ul>
                 <li>
+                    <div class="colorContainer">
+                        <span>1</span>
+                    </div>
+                    <div class="timeContainer">
+                        <span>sg</span>
+                    </div>
                     Nyertes: <span class="winner-text">None</span>
                 </li>
             </ul>
