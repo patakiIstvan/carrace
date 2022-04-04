@@ -2,6 +2,9 @@
 
 require_once "Racecar.php";
 require_once "Race.php";
+require "db.php";
+include "db.php";
+
 
 // storing serialised instances
 function storeCars($carInstances){
@@ -17,6 +20,8 @@ function getCars(){
   fclose($myfile);
    return unserialize($cars);
 }
+
+
 
 if( isset($_POST['functionname']) ) { 
     $aResult = array();
@@ -42,6 +47,9 @@ if( isset($_POST['functionname']) ) {
             $aResult['cars'][] = $a;
           }
           storeCars(Race::getCars());
+          $aResult['db'] = [];
+
+
           break;
          case 'moveCars': // MOVECAR =======================================
           $cars = getCars();
@@ -64,4 +72,4 @@ if( isset($_POST['functionname']) ) {
    }
 
    echo json_encode($aResult);
-   }
+  }

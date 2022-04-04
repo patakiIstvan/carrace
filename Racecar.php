@@ -30,7 +30,7 @@ public function setColor($color){
     return $this->speed;
 }
 public function setSpeed(){
-    $this->speed = rand(20,35)/10;
+   $this->speed = rand(20,35)/10;
 }
 public function getPlacement(){
     return $this->placement;
@@ -75,4 +75,3 @@ public function move(){
 }
 }
 }
-
